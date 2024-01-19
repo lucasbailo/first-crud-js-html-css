@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <h1>Creat your account</h1>
+    <form>
+        <div>
+            <div class="label">
+                <label for="">Type your email</label>
+            </div>
+            <input type="email" name="" id="email" placeholder="your@email.com" onchange="onChangeEmail()">
+            <div>
+                <span id="email-required-error" class="error">Email is required</span>
+            </div>
+            <div>
+                <span id="email-invalid-error" class="error">Invalid email</span>
+            </div>
+        </div>
+        <div>
+            <div class="label">
+                <label for="">Create your password</label>
+            </div>
+            <input type="password" name="" id="password" placeholder="Password" onchange="onChangePassword()">
+            <div>
+                <span id="password-required-error" class="error">Password is required</span>
+            </div>
+            <div>
+                <span id="password-min-length-error" class="error">Password must be at least 6 characters long</span>
+            </div>
+        </div>
+        <div>
+            <div class="label">
+                <label for="">Confirm your password</label>
+            </div>
+            <input type="password" name="" id="confirmPassword" placeholder="Repeat your Password" onchange="onChangeConfirmPassword()">
+            <div>
+                <span id="password-doesnt-match-error" class="error">Password confirmation must be the same as your password</span>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="solid" disabled="true" id="register-button" onclick="register()"><strong>Register</strong></button>
+        </div>
+        <div>
+            <button type="button" class="clear">Log In</button>
+        </div>
+    </form>
+</body>
+<script src="register.js"></script>
+<script src="../../validations.js"></script>
+<script src="../../loading.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check-compat.js"></script>
+<script src="../../firebase-init.js"></script>
+
+</html>
