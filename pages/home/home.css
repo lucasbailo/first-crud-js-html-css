@@ -1,0 +1,13 @@
+body {
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+header {
+    width: 100%;
+    text-align: right;
+}
+
+header button {
+    width: auto;
+}
