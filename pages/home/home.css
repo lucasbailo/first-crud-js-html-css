@@ -1,13 +1,30 @@
 body {
     height: 100vh;
     justify-content: flex-start;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 header {
-    width: 100%;
+    width: 100vw;
     text-align: right;
 }
 
 header button {
     width: auto;
 }
+
+ol {
+    width: 100%;
+}
+
+ol li.expense {
+    border-left: 7px solid red;
+}
+
+ol li.income {
+    border-left: 7px solid green;
+}
+
+
