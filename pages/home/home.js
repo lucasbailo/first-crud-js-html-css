@@ -6,13 +6,31 @@ function logout() {
     })
 }
 
-findTransactions ();
 
-function findTransactions () {
-    setTimeout(()=>{
-        addTransactionsToScreen(fakeTransactions)
-    }, 1000)
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        findTransactions(user)
+    }
+})
 
+
+function findTransactions(user) {
+    showLoading();
+    firebase.firestore()
+        .collection('transactions')
+        .where('user.uid', '==', user.uid)
+        .orderBy('date','desc')
+        .get()
+        .then(snapshot => {
+            hideLoading()
+            const transactions = snapshot.docs.map(doc => doc.data())
+            addTransactionsToScreen(transactions)
+        })
+        .catch(error =>{
+            hideLoading();
+            console.log(error);
+            alert("Error when recovering transactions")
+        })
 }
 
 function addTransactionsToScreen (transactions) {
