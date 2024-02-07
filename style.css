@@ -22,10 +22,14 @@ form {
     width: 25%;
 }
 
-input, button {
+input, button, select {
     padding: 0.5rem;
     width: 100%;
     font-family: var(--font1);
+}
+
+input [type="radio"] {
+    width: auto;
 }
 
 .clear {

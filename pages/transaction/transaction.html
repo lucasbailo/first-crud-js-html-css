@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="transaction.css">
+</head>
+
+<body>
+    <header>
+        <button class="clear" type="button" onclick="logout()">Exit</button>
+    </header>
+    <form>
+        <div class="label"><label>Transaction</label></div>
+        <div class="transaction-form">
+            <div class="transaction-input-div">
+                <input type="radio" name="type" checked id="expense">
+                <label for="expense">Expense</label>
+            </div>
+            <div class="transaction-input-div">
+                <input type="radio" name="type" id="income">
+                <label for="income">Income</label>
+            </div>
+        </div>
+        <div class="transaction-form-divs">
+            <div class="label"><label>Transaction Date*</label></div>
+            <div class="transaction-input-div">
+                <input type="date" onchange="onchangeDate()" id="date">
+            </div>
+            <div>
+                <span id="date-required-error" class="error">Date is required / invalid</span>
+            </div>
+        </div>
+        <div class="transaction-form-divs">
+            <div class="label"><label>Currency*</label></div>
+            <select>
+                <option value="USD">Dollar</option>
+                <option value="EUR">Euro</option>
+                <option value="BRL" selected>Real</option>
+            </select>
+        </div>
+        <div class="transaction-form-divs">
+            <div class="label"><label>Amount*</label></div>
+            <input type="number" id="amount" onchange="onChangeAmount()">
+            <div>
+                <span id="amount-required-error" class="error">Amount is required</span>
+            </div>
+            <div>
+                <span id="amount-negative-or-zero-error" class="error">Amount must be greater than zero</span>
+            </div>
+        </div>
+        <div class="transaction-form-divs">
+            <div class="label"><label>Transaction Type*</label></div>
+            <select onchange="onChangeTransactionType()" id="transaction-type">
+                <option value="">-- Select a transaction type --</option>
+                <option>Rent</option>
+                <option>Supermarket</option>
+                <option>Sallary</option>
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Health</option>
+                <option>Other</option>
+            </select>
+            <div>
+                <span id="transaction-required-error" class="error">Transaction Type is required</span>
+            </div>
+        </div>
+        <div class="transaction-form-divs">
+            <div class="label"><label>Description</label></div>
+            <input type="text" name="" id="">
+        </div>
+        <button type="button" class="solid" disabled id="save-button">Save</button>
+        <button type="button" class="clear">Cancel</button>
+    </form>
+
+</body>
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="../../firebase-init.js"></script>
+<script src="../../auth-guard.js"></script>
+<script src="../../loading.js"></script>
+<script src="transaction.js"></script>
+
+</html>
