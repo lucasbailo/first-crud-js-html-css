@@ -68,31 +68,9 @@ function addTransactionsToScreen (transactions) {
 }
 
 function formatDate (date) {
-    return new Date(date).toLocaleDateString('en-US')
+    return new Date(date).toLocaleDateString('pt-br')
 }
 
 function formatMoney(money) {
-    return `${money.currency} ${money.value.toFixed(2)}`
+    return `${money.currency} ${money.amount.toFixed(2)}`
 }
-
-
-const fakeTransactions = [{
-    type: 'expense',
-    date: '2022-01-02',
-    money: {
-        currency: 'USD',
-        value: 10,
-    },
-    transactionType: 'Supermarket'
-},
-{
-    type: 'income',
-    date: '2022-01-03',
-    money: {
-        currency: 'R$',
-        value: 5000,
-    },
-    transactionType: 'Sallary',
-    description: 'Company A'
-}]
-
