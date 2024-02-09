@@ -1,19 +1,105 @@
+if (!isNewTransaction()) {
+    const uid = getTransactionUid();
+    findTransactionByUid(uid)
+}
+
+getTransactionUid();
+
+function findTransactionByUid(uid) {
+    showLoading();
+    firebase.firestore()
+        .collection('transactions')
+        .doc(uid)
+        .get()
+        .then(doc => {
+            hideLoading()
+            if(doc.exists) {
+                fillTransactionScreen(doc.data())
+                toggleSaveButtonDisable();
+            } else {
+                alert("Transaction not found")
+                window.location.href = "../home/home.html"
+            }
+        })
+        .catch(()=> {
+            hideLoading();
+            alert("Error recovering transaction");
+            window.location.href = "../home/home.html";
+        })
+}
+
+function fillTransactionScreen(transaction) {
+    if (transaction.type == "expense") {
+        form.typeExpense().checked = "true"
+    } else {
+        form.typeIncome().checked = "true"
+    }
+
+    form.date().value = transaction.date;
+    form.currency().value = transaction.money.currency;
+    form.amount().value = transaction.money.amount;
+    form.transactionType().value = transaction.transactionType;
+
+    if (transaction.description) {
+        form.description().value = transaction.description;
+    }
+
+}
+
+function getTransactionUid() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('uid')
+}
+
+function isNewTransaction(){
+    return getTransactionUid() ? false : true;
+}
+
 function saveTransaction() {
     showLoading();
 
     const transaction = createTransaction()
 
+    if(isNewTransaction()) {
+        save(transaction);
+    } else {
+        update(transaction)
+    }
+
+   
+}
+
+function update(transaction) {
+    showLoading();
+
     firebase.firestore()
         .collection('transactions')
-        .add(transaction)
+        .doc(getTransactionUid())
+        .update(transaction)
         .then(() => {
             hideLoading();
             window.location.href = "../home/home.html"
         })
         .catch(() => {
             hideLoading();
-            alert("Transaction saving error")
+            alert('Transaction update error')
         })
+
+}
+
+function save(transaction) {
+    firebase.firestore()
+    .collection('transactions')
+    .add(transaction)
+    .then(() => {
+        hideLoading();
+        window.location.href = "../home/home.html"
+    })
+    .catch(() => {
+        hideLoading();
+        alert("Transaction saving error")
+    })
 }
 
 function createTransaction() {
@@ -89,6 +175,7 @@ const form = {
     amountRequiredError: () => document.getElementById('amount-required-error'),
     amountNegativeOrZeroError: () => document.getElementById('amount-negative-or-zero-error'),
     typeExpense: () => document.getElementById('expense'),
+    typeIncome: () => document.getElementById('income'),
     transactionType: () => document.getElementById('transaction-type'),
     description: () => document.getElementById('description'),
     transactionTypeRequiredError: () => document.getElementById('transaction-required-error'),
