@@ -39,6 +39,11 @@ input [type="radio"] {
     font-weight: bold;
 }
 
+.clear.danger {
+    color: red;
+    border: 1px solid red;
+}
+
 button {
     cursor: pointer;
 }

@@ -7,14 +7,12 @@ getTransactionUid();
 
 function findTransactionByUid(uid) {
     showLoading();
-    firebase.firestore()
-        .collection('transactions')
-        .doc(uid)
-        .get()
-        .then(doc => {
+
+    transactionService.findByUid(uid)
+        .then(transaction => {
             hideLoading()
-            if(doc.exists) {
-                fillTransactionScreen(doc.data())
+            if(transaction) {
+                fillTransactionScreen(transaction)
                 toggleSaveButtonDisable();
             } else {
                 alert("Transaction not found")
@@ -73,10 +71,7 @@ function saveTransaction() {
 function update(transaction) {
     showLoading();
 
-    firebase.firestore()
-        .collection('transactions')
-        .doc(getTransactionUid())
-        .update(transaction)
+    transactionService.update(transaction)
         .then(() => {
             hideLoading();
             window.location.href = "../home/home.html"
@@ -89,9 +84,7 @@ function update(transaction) {
 }
 
 function save(transaction) {
-    firebase.firestore()
-    .collection('transactions')
-    .add(transaction)
+    transactionService.save(transaction)
     .then(() => {
         hideLoading();
         window.location.href = "../home/home.html"
